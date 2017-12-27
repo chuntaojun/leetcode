@@ -14,8 +14,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        pass
+        if len(nums) == 0:
+            return 0
+        if len(nums) <= 2:
+            return max(nums[0], nums[len(nums) - 1])
+        dp = [i for i in nums]
+        for i in range(0, len(nums)):
+            for j in range(i + 2, len(nums)):
+                dp[j] = max(nums[j] + dp[i], dp[j])
+        dp.sort()
+        return dp[len(dp) - 1]
 
 
 if __name__ == '__main__':
-    pass
+    s = Solution()
+    test = [1,3,1]
+    print s.rob(test)
