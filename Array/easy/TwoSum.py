@@ -18,26 +18,12 @@ class Solution(object):
         :type target: int
         :rtype: list[int]
         """
-        tmp_nums = [i for i in nums]
-        tmp_nums.sort()
-        max_loc = len(nums) - 1
-        for i in range(len(tmp_nums)):
-            if tmp_nums[i] >= target:
-                max_loc = i
-                break
-        l, r = 0, max_loc
-        while l > r:
-            ans = tmp_nums[l] + tmp_nums[r]
-            if ans == target:
-                break
-            elif ans > target:
-                r -= 1
-            else:
-                l += 1
-        l = nums.index(tmp_nums[l])
-        nums[l] = -1
-        r = nums.index(tmp_nums[r])
-        return [nums.index(tmp_nums[l]), nums.index(tmp_nums[r])]
+        hash = {}
+        for i in range(len(nums)):
+            if target - nums[i] in hash:
+                return [hash[target - nums[i]], i]
+            hash[nums[i]] = i
+        return [-1, -1]
 
 
 if __name__ == '__main__':
