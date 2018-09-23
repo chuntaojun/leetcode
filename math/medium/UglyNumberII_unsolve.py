@@ -25,4 +25,4 @@ class Solution(object):
 
 
 s = Solution()
-print s.nthUglyNumber(9)
+print(s.nthUglyNumber(9))
