@@ -25,4 +25,4 @@ class Solution(object):
 if __name__ == '__main__':
     s = Solution()
     test = [-2, 1]
-    print s.maxSubArray(test)
+    print(s.maxSubArray(test))

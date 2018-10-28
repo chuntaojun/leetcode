@@ -22,7 +22,6 @@ class Solution(object):
         :rtype: int
         """
         cost.append(0)
-        print cost
         dp = [0 for i in range(len(cost) - 1)]
         dp[0] = cost[0]
         dp[1] = cost[1]
@@ -34,4 +33,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.minCostClimbingStairs([10, 15, 20])
+    print(s.minCostClimbingStairs([10, 15, 20]))

@@ -19,6 +19,10 @@ class NumArray(object):
         """
         :type nums: List[int]
         """
+        dp = [nums[i] for i in range(len(nums))]
+        for i in range(1, len(nums)):
+            dp[i] = dp[i - 1] + nums[i]
+        self.dp = dp
 
     def sumRange(self, i, j):
         """
@@ -26,6 +30,9 @@ class NumArray(object):
         :type j: int
         :rtype: int
         """
+        if i == 0:
+            return self.dp[j]
+        return self.dp[j] - self.dp[i - 1]
 
 # Your NumArray object will be instantiated and called as such:
 # obj = NumArray(nums)
@@ -33,4 +40,9 @@ class NumArray(object):
 
 
 if __name__ == '__main__':
-    pass
+    nums = [-2, 0, 3, -5, 2, -1]
+    s = NumArray(nums)
+    print(s.dp)
+    print(s.sumRange(0, 2))
+    print(s.sumRange(2, 5))
+    print(s.sumRange(0, 5))

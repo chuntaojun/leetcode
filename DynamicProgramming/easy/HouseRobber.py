@@ -29,4 +29,4 @@ class Solution(object):
 if __name__ == '__main__':
     s = Solution()
     test = [1,3,1]
-    print s.rob(test)
+    print(s.rob(test))
