@@ -33,6 +33,8 @@ Input:     1         1
 Output: false
 """
 
+import operator
+
 
 # Definition for a binary tree node.
 class TreeNode(object):
@@ -52,7 +54,12 @@ class Solution(object):
         list_1, list_2 = [], []
         self.pre(p, list_1)
         self.pre(q, list_2)
-        return 0 == cmp(list_1, list_2)
+        if len(list_1) == len(list_2):
+            for i in range(len(list_1)):
+                if list_1[i] != list_2[i]:
+                    return False
+            return True
+        return False
 
     def pre(self, tree, l):
         """
@@ -65,7 +72,5 @@ class Solution(object):
             l.append(tree.val)
             self.pre(tree.left, l)
             self.pre(tree.right, l)
-
-
-if __name__ == '__main__':
-    pass
+        if tree is None:
+            l.append(None)
