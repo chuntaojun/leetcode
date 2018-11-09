@@ -42,11 +42,25 @@ class Solution:
         :type root: TreeNode
         :rtype: List[str]
         """
-        return self.dfs(node=root)
+        self.ans = []
+        self.final_ans = []
+        self.dfs(node=root, l=[])
+        for i in range(len(self.ans)):
+            s = ''
+            for j in range(len(self.ans[i]) - 1):
+                s += str(self.ans[i][j]) + '->'
+            s += str(self.ans[i][len(self.ans[i]) - 1])
+            self.final_ans.append(s)
+        return self.final_ans
     
-    def dfs(self, node):
+    def dfs(self, node, l):
         if node is None:
-            return 0
+            return
         if node.left is None and node.right is None:
-            return 1
-        
+            l.append(node.val)
+            self.ans.append(l.copy())
+            l.pop()
+            return
+        l.append(node.val)
+        self.dfs(node=node.left, l=l.copy())
+        self.dfs(node=node.right, l=l.copy())
