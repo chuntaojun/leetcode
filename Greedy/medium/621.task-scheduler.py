@@ -48,4 +48,22 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        
+        t_tasks = {}
+        max_count = 0
+        other_count = 0
+        for i in tasks:
+            if t_tasks.__contains__(i):
+                t_tasks[i] += 1
+            else:
+                t_tasks[i] = 1
+            max_count = max(max_count, t_tasks[i])
+        for _, v in t_tasks.items():
+            if v == max_count:
+                other_count += 1
+        return max(len(tasks), (max_count - 1) * (n + 1) + other_count)
+
+
+if __name__ == '__main__':
+    s = Solution()
+    s.leastInterval(tasks=["A","A","A","B","B","B"], n=2)
+    
