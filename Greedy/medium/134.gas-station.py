@@ -78,4 +78,16 @@ class Solution(object):
         :type cost: List[int]
         :rtype: int
         """
-        
+        total = 0; sums = 0; loc = 0
+        for i in range(len(gas)):
+            total += gas[i] - cost[i]
+            sums += gas[i] - cost[i]
+            if sums < 0:
+                loc = i + 1
+                sums = 0
+        return loc if total >= 0 else -1
+
+
+if __name__ == '__main__':
+    s = Solution()
+    print(s.canCompleteCircuit(gas=[2,3,4], cost=[3,4,3]))
