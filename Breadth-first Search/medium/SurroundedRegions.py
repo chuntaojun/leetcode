@@ -44,7 +44,7 @@ class Solution(object):
                     board[i][j] = 'O'
                 elif board[i][j] == 'O':
                     board[i][j] = 'X'
-        print board
+        print(board)
 
     def BFS(self, board, x, y):
         if board[x][y] == 'O':

@@ -69,4 +69,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.findRedundantConnection([[1, 2], [2, 3], [1, 5], [3, 4], [1, 4]])
+    print(s.findRedundantConnection([[1, 2], [2, 3], [1, 5], [3, 4], [1, 4]]))
