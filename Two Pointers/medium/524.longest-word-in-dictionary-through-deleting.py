@@ -54,4 +54,23 @@ class Solution(object):
         :type d: List[str]
         :rtype: str
         """
-        
+        d.sort(key=lambda x:(-len(x), x))
+        for i in range(len(d)):
+            tmp = list(s)
+            a = 0; b = 0
+            while a < len(tmp) and b < len(d[i]):
+                if tmp[a] == d[i][b]:
+                    a += 1
+                    b += 1
+                else:
+                    a += 1
+                if b == len(d[i]):
+                    return d[i]
+        return ""
+
+
+if __name__ == '__main__':
+    s = Solution()
+    t_1 = "aewfafwafjlwajflwajflwafj"
+    t_2 = ["apple","ewaf","awefawfwaf","awef","awefe","ewafeffewafewf"]
+    print(s.findLongestWord(s=t_1, d=t_2))
