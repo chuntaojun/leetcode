@@ -66,28 +66,13 @@ class Solution(object):
         :type limit: int
         :rtype: int
         """
+        len_people = len(people)
         people.sort()
-        l = 0
-        r = len(people) - 1
+        l = 0; r = len_people - 1
         total = 0
-        nums = 2
-        diff = limit - people[l]
-        while l <= r and:
-            if diff >= people[r]:
-                total += 1
-                people.remove(people[r])
+        while l < r:
+            total += 1
+            if people[l] + people[r] <= limit:
                 l += 1
-                r = len(people) - 1
-                if l >= len(people):
-                    break
-                diff = limit - people[l]
-            else:
-                r -= 1
+            r -= 1
         return total
-
-
-if __name__ == '__main__':
-    s = Solution()
-    people = [1,1,1,2]
-    limit = 3
-    print(s.numRescueBoats(people=people, limit=limit))
