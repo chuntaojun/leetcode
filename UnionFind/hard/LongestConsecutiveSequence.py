@@ -20,9 +20,9 @@ class Solution(object):
         """
         ans, res = {}, 0
         for num in nums:
-            if ans.has_key(num) is False:
-                left = ans.get(num - 1) if ans.has_key(num - 1) else 0
-                right = ans.get(num + 1) if ans.has_key(num + 1) else 0
+            if ans.__contains__(num) is False:
+                left = ans.get(num - 1) if ans.__contains__(num - 1) else 0
+                right = ans.get(num + 1) if ans.__contains__(num + 1) else 0
                 sums = left + right + 1
                 ans[num] = sums
                 res = max(res, sums)

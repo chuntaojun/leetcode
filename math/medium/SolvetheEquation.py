@@ -93,4 +93,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.solveEquation("x+5-3+x=6+x-2")
+    print(s.solveEquation("x+5-3+x=6+x-2"))
