@@ -47,7 +47,6 @@ class MinStack(object):
         """
         initialize your data structure here.
         """
-        import sys
         self.min_num = []
         self.q = []
 
@@ -56,30 +55,31 @@ class MinStack(object):
         :type x: int
         :rtype: void
         """
+        self.q.append(x)
+        if len(self.min_num) == 0:
+            self.min_num.append(x) 
+        elif x > self.min_num[-1]:
+            x = self.min_num[-1]
         self.min_num.append(x)
-        self.min_num.sort()
-        self.q.insert(0, x)
 
     def pop(self):
         """
         :rtype: void
         """
-        t = self.q[0]
-        self.q.remove(t)
-        self.min_num.remove(t)
-        return t
+        self.min_num.pop()
+        return self.q.pop()
 
     def top(self):
         """
         :rtype: int
         """
-        return self.q[0]
+        return self.q[-1]
 
     def getMin(self):
         """
         :rtype: int
         """
-        return self.min_num[0]
+        return self.min_num[-1]
         
 
 

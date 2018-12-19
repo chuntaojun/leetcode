@@ -38,10 +38,13 @@
 # test cases.
 #
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+import json
+
+
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
@@ -52,9 +55,9 @@ class Solution(object):
         pA = headA
         pB = headB
         if headA == None or headB == None:
-            return
+            return None
         while pA and pB:
-            if pA.val != pB.val:
+            if (pA.val == pB.val and pA != pB) or pA.val != pB.val:
                 if pA.next and pB.next:
                     pA = pA.next
                     pB = pB.next
@@ -65,6 +68,63 @@ class Solution(object):
                     pA = pA.next
                     pB = headA
                 else:
-                    return
+                    return None
             else:
                 return pA
+
+
+def stringToInt(input):
+    return int(input)
+
+def stringToListNode(input):
+    # Generate list from the input
+    numbers = json.loads(input)
+
+    # Now convert that list into linked list
+    dummyRoot = ListNode(0)
+    ptr = dummyRoot
+    for number in numbers:
+        ptr.next = ListNode(number)
+        ptr = ptr.next
+
+    ptr = dummyRoot.next
+    return ptr
+
+def listNodeToString(node):
+    if not node:
+        return "[]"
+
+    result = ""
+    while node:
+        result += str(node.val) + ", "
+        node = node.next
+    return "[" + result[:-2] + "]"
+
+def main():
+    import sys
+    def readlines():
+        for line in sys.stdin:
+            yield line.strip('\n')
+    lines = readlines()
+    while True:
+        try:
+            line = lines.__next__()
+            intersectVal = stringToInt(line)
+            line = lines.__next__()
+            listA = stringToListNode(line)
+            line = lines.__next__()
+            listB = stringToListNode(line)
+            line = lines.__next__()
+            skipA = stringToInt(line)
+            line = lines.__next__()
+            skipB = stringToInt(line)
+            
+            ret = Solution().getIntersectionNode(listA, listB)
+
+            out = listNodeToString(ret)
+            print(out)
+        except StopIteration:
+            break
+
+if __name__ == '__main__':
+    main()

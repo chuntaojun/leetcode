@@ -47,5 +47,5 @@ class Solution(object):
             else:
                 ans[nums[i]] = 0
         key_list = ans.keys()
-        for i in range(len(key_List):
+        for i in range(len(key_List)):
             pass
