@@ -42,6 +42,9 @@ class Solution(object):
         return None if head == None else self.mergeSort(node=head)
     
     def mergeSort(self, node):
+        """
+        快慢指针，
+        """
         if node.next == None:
             return node
         p = node; q = node; pre = None

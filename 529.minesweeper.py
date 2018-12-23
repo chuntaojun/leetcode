@@ -111,57 +111,67 @@ class Solution(object):
         """
         self.width = len(board[0])
         self.heigh = len(board)
-        if board[click[1]][click[0]] == 'M':
-            board[click[1]][click[0]] = 'X'
+        self.board = board
         for i in range(self.heigh):
             for j in range(self.width):
-                if board[i][j] == 'E':
-                    self.dfs(board=board, x=j, y=i)
-        return board
+                if self.board[i][j] == 'E':
+                    self.dfs(x=j, y=i)
+        for k in self.board:
+            print(k)
+        return self.board
     
-    def dfs(self, board, x, y):
-        if board[y][x] != 'E':
+    def dfs(self, x, y):
+        if not self.judge_is_overflow(x=x, y=y):
             return
-        self.mineNum(board=board, x=x, y=y)
-        self.dfs(board=board, x=x - 1, y=y)
-        self.dfs(board=board, x=x + 1, y=y)
-        self.dfs(board=board, x=x, y=y - 1)
-        self.dfs(board=board, x=x, y=y + 1)
+        if self.board[y][x] != 'E':
+            return
+        if self.board[y][x] == 'M':
+            return
+        self.mineNum(x=x, y=y)
+        self.dfs(x=x - 1, y=y)
+        self.dfs(x=x + 1, y=y)
+        self.dfs(x=x, y=y - 1)
+        self.dfs(x=x, y=y + 1)
     
-    def mineNum(self, board, x, y):
+    def mineNum(self, x, y):
         nums = 0
-        if not self.judge_is_overflow(x, y):
-            return
-        if self.judge_is_overflow(x=x-1, y=y) and board[y][x - 1] == 'M':
-            nums += 1
-        if self.judge_is_overflow(x=x+1, y=y) and board[y][x + 1] == 'M':
-            nums += 1
-        if self.judge_is_overflow(x=x, y=y-1) and board[y - 1][x] == 'M':
-            nums += 1
-        if self.judge_is_overflow(x=x-1, y=y+1) and board[y + 1][x] == 'M':
-            nums += 1
-        if self.judge_is_overflow(x=x-1, y=y-1) and board[y - 1][x - 1] == 'M':
-            nums += 1
-        if self.judge_is_overflow(x=x-1, y=y+1) and board[y - 1][x - 1] == 'M':
-            nums += 1
-        if self.judge_is_overflow(x=x+1, y=y-1) and board[y - 1][x - 1] == 'M':
-            nums += 1
-        if self.judge_is_overflow(x=x+1, y=y+1) and board[y - 1][x - 1] == 'M':
-            nums += 1
-        if nums == 0:
-            board[y][x] = 'B'
-        else:
-            board[y][x] = nums
+        if self.judge_is_overflow(x=x, y=y):
+            if self.judge_is_overflow(x=x-1, y=y) and self.board[y][x - 1] == 'M':
+                nums += 1
+            if self.judge_is_overflow(x=x+1, y=y) and self.board[y][x + 1] == 'M':
+                nums += 1
+            if self.judge_is_overflow(x=x, y=y-1) and self.board[y - 1][x] == 'M':
+                nums += 1
+            if self.judge_is_overflow(x=x-1, y=y+1) and self.board[y + 1][x] == 'M':
+                nums += 1
+            if self.judge_is_overflow(x=x-1, y=y-1) and self.board[y - 1][x - 1] == 'M':
+                nums += 1
+            if self.judge_is_overflow(x=x-1, y=y+1) and self.board[y + 1][x - 1] == 'M':
+                nums += 1
+            if self.judge_is_overflow(x=x+1, y=y-1) and self.board[y - 1][x + 1] == 'M':
+                nums += 1
+            if self.judge_is_overflow(x=x+1, y=y+1) and self.board[y + 1][x + 1] == 'M':
+                nums += 1
+            if nums == 0:
+                self.board[y][x] = 'B'
+            else:
+                self.board[y][x] = str(nums)
 
     def judge_is_overflow(self, x, y):
-        if x < 0 or x > self.width or y < 0 or y > self.heigh:
+        if x < 0 or x >= self.width or y < 0 or y >= self.heigh:
             return False
         return True
 
 
 if __name__ == '__main__':
     s = Solution()
-    board = [["E","E","E","E","E"],["E","E","M","E","E"],["E","E","E","E","E"],["E","E","E","E","E"]]
+    board = [["E","E","E","E","E"],
+             ["E","E","M","E","E"],
+             ["M","E","E","E","E"],
+             ["E","E","E","E","E"]]
+    target = [["E","E","E","E","E"],
+              ["E","E","M","E","E"],
+              ["M","E","E","E","E"],
+              ["1","E","E","E","E"]]
     click = [3,0]
     s.updateBoard(board=board, click=click)
-    
