@@ -85,4 +85,48 @@ class Solution(object):
         :type board: List[List[str]]
         :rtype: bool
         """
-        
+        self.sudo = {}
+        height = len(board)
+        width = len(board[0])
+        for i in range(height):
+            for j in range(width):
+                if board[i][j] != '.':
+                    if self.sudo.__contains__('H-' + str(i)):
+                        if board[i][j] in self.sudo['H-' + str(i)]:
+                            return False
+                        self.sudo['H-' + str(i)].append(board[i][j])
+                    else:
+                        self.sudo['H-' + str(i)] = [board[i][j]]
+
+                    if self.sudo.__contains__('L-' + str(j)):
+                        if board[i][j] in self.sudo['L-' + str(j)]:
+                            return False
+                        self.sudo['L-' + str(j)].append(board[i][j])
+                    else:
+                        self.sudo['L-' + str(j)] = [board[i][j]]
+
+                    g_n = 'G-' + self.gNum(i=i, j=j)
+                    if self.sudo.__contains__(g_n):
+                        if board[i][j] in self.sudo[g_n]:
+                            return False
+                        self.sudo[g_n].append(board[i][j])
+                    else:
+                        self.sudo[g_n] = [board[i][j]]
+        return True
+    
+    def gNum(self, i, j):
+        return str(3 * (int(i / 3) + 1) + int(j / 3) + 1)
+
+
+if __name__ == '__main__':
+    s = Solution()
+    t = [[".",".",".",".","5",".",".","1","."],
+         [".","4",".","3",".",".",".",".","."],
+         [".",".",".",".",".","3",".",".","1"],
+         ["8",".",".",".",".",".",".","2","."],
+         [".",".","2",".","7",".",".",".","."],
+         [".","1","5",".",".",".",".",".","."],
+         [".",".",".",".",".","2",".",".","."],
+         [".","2",".","9",".",".",".",".","."],
+         [".",".","4",".",".",".",".",".","."]]
+    print(s.isValidSudoku(board=t))
