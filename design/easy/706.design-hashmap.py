@@ -115,16 +115,3 @@ class MyHashMap(object):
         for i in range(len(t)):
             hash_code = (hash_code << 5) + int(t[i]) + 1
         return int(hash_code % self.table_size)
-
-
-
-if __name__ == '__main__':
-    myMap = MyHashMap()
-    myMap.put(1, 1)
-    myMap.put(2, 2)
-    print(myMap.get(1))
-    print(myMap.get(3))
-    myMap.put(2, 1)
-    print(myMap.get(2))
-    myMap.remove(2)
-    print(myMap.get(2))
