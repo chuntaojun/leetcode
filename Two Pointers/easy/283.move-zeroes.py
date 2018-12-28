@@ -48,4 +48,3 @@ class Solution(object):
             elif nums[a] != 0 and nums[b] != 0:
                 a = b
                 b += 1
-        print(nums)

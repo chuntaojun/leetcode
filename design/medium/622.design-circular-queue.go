@@ -70,52 +70,75 @@ package medium
 
 
 type MyCircularQueue struct {
-	Element		[]int
-	Size		int
-	Capacity	int
+	element  []int
+	capacity int
+	head     int
+	tail     int
+	rear	 int
 }
 
 
 /** Initialize your data structure here. Set the size of the queue to be k. */
 func Constructor(k int) MyCircularQueue {
 	q := &MyCircularQueue{}
-	
+	q.element = make([]int, k + 1, k + 1)
+	q.capacity = k + 1
+	q.head = 0
+	q.tail = 0
+	q.rear = 0
+	return *q
 }
 
 
 /** Insert an element into the circular queue. Return true if the operation is successful. */
 func (this *MyCircularQueue) EnQueue(value int) bool {
-    
+	if this.IsFull() {
+		return false
+	}
+	this.rear = this.tail
+	this.element[this.tail] = value
+	this.tail = (this.tail + 1) % this.capacity
+	return true
 }
 
 
 /** Delete an element from the circular queue. Return true if the operation is successful. */
 func (this *MyCircularQueue) DeQueue() bool {
-    
+	if this.IsEmpty() {
+		return false
+	}
+	this.head = (this.head + 1) % this.capacity
+	return true
 }
 
 
 /** Get the front item from the queue. */
 func (this *MyCircularQueue) Front() int {
-    
+	if this.IsEmpty() {
+		return -1
+	}
+	return this.element[this.head]
 }
 
 
 /** Get the last item from the queue. */
 func (this *MyCircularQueue) Rear() int {
-    
+	if this.IsEmpty() {
+		return -1
+	}
+	return this.element[this.rear]
 }
 
 
 /** Checks whether the circular queue is empty or not. */
 func (this *MyCircularQueue) IsEmpty() bool {
-    
+	return this.head == this.tail
 }
 
 
 /** Checks whether the circular queue is full or not. */
 func (this *MyCircularQueue) IsFull() bool {
-    
+	return (this.tail+ 1) % this.capacity == this.head
 }
 
 

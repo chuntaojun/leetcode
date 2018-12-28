@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode id=344 lang=python
+# @lc app=leetcode id=344 lang=python3
 #
 # [344] Reverse String
 #
@@ -33,12 +33,18 @@
 # 
 # 
 #
-class Solution(object):
+class Solution:
     def reverseString(self, s):
         """
         :type s: str
         :rtype: str
         """
         s = list(s)
-        s.reverse()
+        a = 0
+        b = len(s) - 1
+        while a <= b:
+            s[a], s[b] = s[b], s[a]
+            a += 1
+            b -= 1
         return ''.join(s)
+
