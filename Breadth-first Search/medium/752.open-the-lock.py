@@ -104,7 +104,6 @@ class Solution:
                         t_l = list(t)
                         t_l[j] = str(int((ord(t_l[j]) - ord('0') + way[k] + 10) % 10))
                         _t = ''.join(t_l)
-                        print(_t)
                         if not vis.__contains__(_t):
                             vis.add(_t)
                             q.append(_t)

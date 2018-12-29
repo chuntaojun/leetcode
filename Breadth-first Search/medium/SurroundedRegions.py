@@ -62,7 +62,7 @@ class Solution(object):
         """
         广度优先遍历搜索的路径实现
         :param board:
-        :param x:
+        :param x:   
         :param y:
         :return:
         """
