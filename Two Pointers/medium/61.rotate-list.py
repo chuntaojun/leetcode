@@ -54,29 +54,23 @@ class Solution(object):
         """
         length = 0
         tmp = head
+        last = head
         while tmp is not None:
             length += 1
+            last = tmp
             tmp = tmp.next
-        if int(k % length) == 0 or length == 0:
+        if length == 0 or int(k % length) == 0:
             return head
         offset_1 = length - int(k % length)
         tmp = head
-        second = head
+        pre = tmp
         while offset_1 > 0:
+            pre = tmp
             tmp = tmp.next
             offset_1 -= 1
+        pre.next = None
         first = tmp
-        tmp = first
-        offset_2 = int(k % length)
-        while offset_2 > 1:
-            tmp = tmp.next
-            offset_2 -= 1
-        tmp.next = head
-        offset_1 = length - int(k % length)
-        while offset_1 > 1:
-            head = head.next
-            offset_1 -= 1
-        head.next = None
+        last.next = head
         return first
 
 def stringToIntegerList(input):

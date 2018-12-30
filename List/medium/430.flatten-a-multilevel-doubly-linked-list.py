@@ -61,7 +61,6 @@ class Node:
         self.next = next
         self.child = child
 
-
 class Solution:
     def flatten(self, head):
         """
@@ -71,12 +70,12 @@ class Solution:
         tmp = head
         while tmp != None:
             if tmp.child != None:
+                tmp.child.prev = tmp
                 last = self.childLast(child=tmp.child)
-                tmp.next.pre = last
                 last.next = tmp.next
-                
+                if tmp.next != None:
+                    tmp.next.prev = last
                 tmp.next = tmp.child
-                tmp.child.pre = tmp
                 tmp.child = None
             tmp = tmp.next
         return head
