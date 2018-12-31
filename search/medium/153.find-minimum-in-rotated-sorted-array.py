@@ -48,9 +48,15 @@ class Solution:
     def twoSearch(self, arr, left, right):
         if left == right:
             return arr[left]
-        mid = int((left + right) - 1)
+        mid = int((left + right) / 2)
         if arr[mid] < arr[right]:
             return self.twoSearch(arr, left=left, right=mid)
         else:
             return self.twoSearch(arr, left=mid + 1, right=right)
         
+
+if __name__ == '__main__':
+    s = Solution()
+    t = [3,4,5,1,2]
+    print(s.findMin(nums=t))
+    

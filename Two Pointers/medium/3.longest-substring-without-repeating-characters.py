@@ -68,3 +68,27 @@ class Solution(object):
             elif s[b] in s[a: b]:
                 a += 1
         return max_len
+
+    def lengthOfLongestSubstringWithHash(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        hash_arr = [[0, 0] for i in range(100)]
+        maxLen = 0
+        l = 0; r = 0
+        while r < len(s):
+            t = ord(s[r]) - ord(' ')
+            if hash_arr[t][1] == 0:
+                hash_arr[t] = [r, 1]
+                maxLen = max(maxLen, r - l + 1)
+                r += 1
+            else:
+                loc, _ = hash_arr[t]
+                for j in range(l, loc + 1):
+                    hash_arr[ord(s[j]) - ord(' ')] = [0, 0]
+                l = loc + 1
+                hash_arr[t] = [r, 1]
+                maxLen = max(maxLen, r - l + 1)
+                r += 1
+        return maxLen
