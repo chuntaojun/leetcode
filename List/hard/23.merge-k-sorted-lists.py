@@ -65,3 +65,20 @@ class Solution(object):
             tmp.next = node
             tmp = tmp.next
         return head.next
+    
+    def mergeKLists2(self, lists):
+        import heapq
+        h = []
+        head = ListNode(-1)
+        tmp = head
+        for i in range(len(lists)):
+            if lists[i] != None:
+                heapq.heappush(h, (lists[i].val, i))
+        while len(h) != 0:
+            _, loc = heapq.heappop(h)
+            tmp.next = lists[loc]
+            tmp = tmp.next
+            lists[loc] = lists[loc].next
+            if lists[loc] != None:
+                heapq.heappush(h, (lists[loc].val, loc))
+        return head.next

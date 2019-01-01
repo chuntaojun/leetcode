@@ -72,7 +72,7 @@ package medium
 type MyCircularQueue struct {
 	element  []int
 	capacity int
-	head     int
+	front     int
 	tail     int
 	rear	 int
 }
@@ -83,7 +83,7 @@ func Constructor(k int) MyCircularQueue {
 	q := &MyCircularQueue{}
 	q.element = make([]int, k + 1, k + 1)
 	q.capacity = k + 1
-	q.head = 0
+	q.front = 0
 	q.tail = 0
 	q.rear = 0
 	return *q
@@ -107,7 +107,7 @@ func (this *MyCircularQueue) DeQueue() bool {
 	if this.IsEmpty() {
 		return false
 	}
-	this.head = (this.head + 1) % this.capacity
+	this.front = (this.front + 1) % this.capacity
 	return true
 }
 
@@ -117,7 +117,7 @@ func (this *MyCircularQueue) Front() int {
 	if this.IsEmpty() {
 		return -1
 	}
-	return this.element[this.head]
+	return this.element[this.front]
 }
 
 
@@ -132,13 +132,13 @@ func (this *MyCircularQueue) Rear() int {
 
 /** Checks whether the circular queue is empty or not. */
 func (this *MyCircularQueue) IsEmpty() bool {
-	return this.head == this.tail
+	return this.front == this.tail
 }
 
 
 /** Checks whether the circular queue is full or not. */
 func (this *MyCircularQueue) IsFull() bool {
-	return (this.tail+ 1) % this.capacity == this.head
+	return (this.tail+ 1) % this.capacity == this.front
 }
 
 
