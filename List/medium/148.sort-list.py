@@ -64,11 +64,10 @@ class Solution(object):
             if l1.val <= l2.val:
                 tmp.next = l1
                 l1 = l1.next
-                tmp = tmp.next
             else:
                 tmp.next = l2
                 l2 = l2.next
-                tmp = tmp.next
+            tmp = tmp.next
         while l1 != None:
             tmp.next = l1
             l1 = l1.next
@@ -77,5 +76,4 @@ class Solution(object):
             tmp.next = l2
             l2 = l2.next
             tmp = tmp.next
-        tmp = None
         return node.next

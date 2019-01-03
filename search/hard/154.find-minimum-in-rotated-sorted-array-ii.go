@@ -59,8 +59,8 @@ func findMin(nums []int) int {
 	}
 	for left < right {
 		mid := (left + right) / 2
-		kth, ok := minTh(nums, mid)
-		if kth == k && ok {
+		kth, sames, ok := minTh(nums, mid)
+		if kth <= k && k <= kth + sames && ok {
 			return mid
 		}
 		if kth > k {
@@ -72,15 +72,21 @@ func findMin(nums []int) int {
 	return left
 }
 
-func minTh(nums []int, target int) (int, bool) {
+func minTh(nums []int, target int) (int, int, bool) {
 	a := 0
+	b := 0
 	k := false
-	for i := 0; i < len(nums); i++ {
+	for i := 0; i < len(nums); i ++ {
 		if nums[i] > target {
-			a++
-		} else if nums[i] == target {
+			a ++
+		}
+		if nums[i] == target {
+			b ++
 			k = true
 		}
 	}
-	return a + 1, k
+	if b != 0 {
+		b --
+	}
+	return a + 1, b, k
 }

@@ -48,3 +48,11 @@ class Solution:
             if nums[right] != target:
                 right -= 1
         return [-1, -1]
+
+
+if __name__ == '__main__':
+    s = Solution()
+    nums = [5,7,7,8,8,10]
+    target = 8
+    print(s.searchRange(nums=nums, target=target))
+    

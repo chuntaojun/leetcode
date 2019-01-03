@@ -56,6 +56,8 @@
 //         :rtype: int
 //         """
 
+// dp[i - 1] == dp[n] - dp[i]
+
 package easy
 
 func pivotIndex(nums []int) int {
