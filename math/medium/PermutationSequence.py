@@ -8,7 +8,6 @@ class Solution(object):
         temp = [1]
         for i in range(1, n + 1):
             temp.append(temp[-1] * i)
-        print(temp)
         ans, number = [], [i for i in range(1, n + 1)]
         for i in range(n):
             digit = int((k - 1) / temp[n - i - 1])
