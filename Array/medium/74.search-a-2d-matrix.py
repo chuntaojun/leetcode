@@ -53,4 +53,23 @@ class Solution:
         :type target: int
         :rtype: bool
         """
-        
+        row = len(matrix) - 1
+        if row < 0:
+            return False
+        col = len(matrix[0]) - 1
+        if col < 0:
+            return False
+        i = 0; j = col
+        val = matrix[i][j]
+        while True:
+            if val == target:
+                return True
+            elif val < target and i < row:
+                i += 1
+                val = matrix[i][j]
+            elif val > target and j > 0:
+                j -= 1
+                val = matrix[i][j]
+            else:
+                return False
+        return False

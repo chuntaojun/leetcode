@@ -46,6 +46,28 @@
  */
 package medum
 
+import (
+	"math"
+)
+
 func containsNearbyAlmostDuplicate(nums []int, k int, t int) bool {
+    start := 0
+    end := start + 1
+    for start < len(nums) - 1 {
+        if start != end && int(math.Abs(float64(nums[start]) - float64(nums[end]))) <= t {
+            return true
+        }
+        if end - start >= k || len(nums) - 1 == end {
+            start ++
+            if t != 0 {
+                end = start + 1
+            }
+        } else {
+            end ++
+        }
+    }
     return false
 }
+
+
+
