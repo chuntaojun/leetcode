@@ -1,12 +1,14 @@
 #
+# @lc app=leetcode id=496 lang=python3
+#
 # [496] Next Greater Element I
 #
 # https://leetcode.com/problems/next-greater-element-i/description/
 #
 # algorithms
-# Easy (57.48%)
-# Total Accepted:    74.5K
-# Total Submissions: 129.6K
+# Easy (58.14%)
+# Total Accepted:    80.5K
+# Total Submissions: 138.4K
 # Testcase Example:  '[4,1,2]\n[1,3,4,2]'
 #
 # 
@@ -54,24 +56,22 @@
 # 
 # 
 #
-class Solution(object):
-    def nextGreaterElement(self, findNums, nums):
+class Solution:
+    def nextGreaterElement(self, nums1, nums2):
         """
-        :type findNums: List[int]
-        :type nums: List[int]
+        :type nums1: List[int]
+        :type nums2: List[int]
         :rtype: List[int]
         """
+        stack = []
+        hash_map = {}
+        for i in range(len(nums2)):
+            while len(stack) and stack[-1] < nums2[i]:
+                hash_map[stack.pop()] = nums2[i]
+            stack.append(nums2[i])
         ans = []
-        for i in findNums:
-            tmp = []
-            tmp_nums = nums.copy()
-            a = tmp_nums.pop()
-            while a != i:
-                if a > i:
-                    tmp.insert(0, a)
-                a = tmp_nums.pop()
-            if len(tmp) == 0:
-                ans.append(-1)
-            else:
-                ans.append(tmp[0])
+        for i in range(len(nums1)):
+            ans.append(hash_map.get(nums1[i], -1))
         return ans
+
+

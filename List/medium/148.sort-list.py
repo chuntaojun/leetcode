@@ -47,14 +47,14 @@ class Solution(object):
         """
         if node.next == None:
             return node
-        p = node; q = node; pre = None
-        while q != None and q.next != None:
-            pre = p
-            p = p.next
-            q = q.next.next
+        slow = node; fast = node; pre = None
+        while fast != None and fast.next != None:
+            pre = slow
+            slow = slow.next
+            fast = fast.next.next
         pre.next = None
         l = self.mergeSort(node)
-        r = self.mergeSort(p)
+        r = self.mergeSort(slow)
         return self.merge(l1=l, l2=r)
     
     def merge(self, l1, l2):
