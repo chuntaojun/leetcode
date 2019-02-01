@@ -54,8 +54,6 @@
 # 
 #
 # Definition for singly-linked list.
-import json
-
 class ListNode(object):
     def __init__(self, x):
         self.val = x

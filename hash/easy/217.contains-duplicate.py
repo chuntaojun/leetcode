@@ -41,17 +41,32 @@ class Solution:
         :type nums: List[int]
         :rtype: bool
         """
-        self.hash_set = [[] for i in range(1001)]
-        for i in range(len(nums)):
-            loc = self.hash_func(key=nums[i])
-            if nums[i] in self.hash_set[loc]:
+        self.qSort(nums=nums, start=0, end=len(nums) - 1)
+        print(nums)
+        for i in range(1, len(nums)):
+            if nums[i - 1] == nums[i]:
                 return True
-            else:
-                self.hash_set[loc].append(nums[i])
         return False
-
     
-    def hash_func(self, key):
-        return int(key % 1000)
-        
-        
+    def qSort(self, nums, start, end):
+        if start < end:
+            i = start; j = end
+            key = nums[int((i + j) / 2)]
+            while i <= j:
+                while nums[i] < key:
+                    i += 1
+                while nums[j] > key:
+                    j -=1
+                if i <= j:
+                    nums[i], nums[j] = nums[j], nums[i]
+                    i += 1
+                    j -= 1
+            self.qSort(nums=nums, start=start, end=j)
+            self.qSort(nums=nums, start=i, end=end)
+
+
+if __name__ == '__main__':
+    s = Solution()
+    n = [1,2,3,1]
+    print(s.containsDuplicate(nums=n))
+    

@@ -58,9 +58,30 @@ class Solution:
             t = nums.pop()
             nums.insert(0, t)
 
+class Solution2:
+    def rotate(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        l = len(nums)
+        if l == 0:
+            return
+        k = l - int(k % l)
+        self.swap(nums=nums, start=k, end=l - 1)
+        self.swap(nums=nums, start=0, end=k - 1)
+        self.swap(nums=nums, start=0, end=l - 1)
+    
+    def swap(self, nums, start, end):
+        while start <= end:
+            nums[start], nums[end] = nums[end], nums[start]
+            start += 1
+            end -= 1
+
 
 if __name__ == '__main__':
-    s = Solution()
-    n = []
-    s.rotate(nums=n, k=10)
-    
+    s = Solution2()
+    n = [1,2,3,4,5,6,7]
+    s.rotate(nums=n, k=3)
+    print(n)
