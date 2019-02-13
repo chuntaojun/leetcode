@@ -35,5 +35,40 @@
 # 
 #
 class Solution:
-    def hIndex(self, citations: 'List[int]') -> 'int':
-        
+    def hIndex(self, citations):
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        self.qSort(A=citations, start=0, end=len(citations) - 1)
+        h = 0
+        for i in range(len(citations)):
+            if citations[i] != 0:
+                if citations[i] > h:
+                    h += 1
+            else:
+                break
+        return h 
+    
+    def qSort(self, A, start, end):
+        if start < end:
+            i = start
+            j = end
+            key = A[(i + j) // 2]
+            while i <= j:
+                while A[i] > key:
+                    i += 1
+                while A[j] < key:
+                    j -= 1
+                if i <= j:
+                    A[i], A[j] = A[j], A[i]
+                    i += 1
+                    j -= 1
+            self.qSort(A=A, start=start, end=j)
+            self.qSort(A=A, start=i, end=end)
+
+if __name__ == '__main__':
+    s = Solution()
+    test = [3,0,6,1,5]
+    print(s.hIndex(citations=test))
+    
