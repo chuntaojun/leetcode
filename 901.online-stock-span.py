@@ -63,13 +63,18 @@
 class StockSpanner:
     
     def __init__(self):
-        pass
+        self.price_stack = []
 
     def next(self, price):
         """
         :type price: int
         :rtype: int
         """
+        day = 1
+        while len(self.price_stack) and self.price_stack[-1][0] <= price:
+            day += self.price_stack.pop()[1]
+        self.price_stack.append((price, day))
+        return day
 
 
 # Your StockSpanner object will be instantiated and called as such:
