@@ -28,7 +28,13 @@
  * Output: 2
  * Explanation: 13 = 4 + 9.
  */
- func numSquares(n int) int {
+package medium
+
+import (
+	"math"
+)
+
+func numSquares(n int) int {
     dp := make([]int, n + 1, n + 1)
 	for i := 0; i <= n; i ++ {
 		dp[i] = i
