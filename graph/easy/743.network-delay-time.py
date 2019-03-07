@@ -46,8 +46,6 @@ class Solution(object):
         self.point = [sys.maxsize if i != K - 1 else 0 for i in range(N)]
         for i in range(len(times)):
             self.graph[times[i][0] - 1][times[i][1] - 1] = times[i][2]
-        for i in self.graph:
-            print(i)
         self.q = [K]
         while len(self.q) != 0:
             _t = []
@@ -60,7 +58,6 @@ class Solution(object):
                             self.q.append(i + 1)
                         self.point[i] = self.graph[t - 1][i] + self.point[t - 1]
         res = 0
-        print(self.point)
         for i in range(N):
             res = max(res, self.point[i])
         return -1 if res == sys.maxsize else res
