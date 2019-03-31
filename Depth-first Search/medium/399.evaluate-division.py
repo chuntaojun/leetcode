@@ -50,8 +50,8 @@ class Solution(object):
         self.graph = defaultdict(set)
         self.weight = defaultdict()
         for idx, equ in enumerate(equations):
-            self.graph[equ[0]].add(equ[1])
-            self.graph[equ[1]].add(equ[0])
+            self.graph[equ[0]].add(equ[1])  
+            self.graph[equ[1]].add(equ[0])  
             self.weight[tuple(equ)] = values[idx]
             self.weight[(equ[1], equ[0])] = 1 / values[idx]
         res = []

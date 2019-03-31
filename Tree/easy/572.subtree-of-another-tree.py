@@ -93,7 +93,7 @@ class Solution:
                 return self.compare(s=s.left, t=t.left) and self.compare(s=s.right, t=t.right)
             else:
                 return False
-        if (s == None and t != None) or (s != None and t == None):
+        if s == None and t != None:
             return False
         return True
         
